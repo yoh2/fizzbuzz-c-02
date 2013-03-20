@@ -1,4 +1,4 @@
-#if S == 10 /* if S == 10 then set S to 1 instead of 19. */
+#if S == 10
 #undef S
 #if N0
 #undef N0
