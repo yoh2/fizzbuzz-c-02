@@ -17,5 +17,6 @@
 *.app
 
 # Editor backups
+.sw[op]
 .*.sw[op]
 *~
