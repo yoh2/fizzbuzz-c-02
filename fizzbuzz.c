@@ -1,14 +1,14 @@
-#ifndef I
-#define N0 0
-#define N1 0
-#define N2 0
-#define I
+#if !I 
+#define I 1 
+#define C(x,y,z) x##y##z
+#define CS(x,y,z) TS(C(x,y,z))
+#define TS(x) TS2(x)
+#define TS2(x) #x
 #include <stdio.h>
 int main(int argc, char *argv[])
 {
 #endif
 #if N0 == 0
-#undef N0
 #define N0 1
 #elif N0 == 1
 #undef N0
@@ -36,9 +36,7 @@ int main(int argc, char *argv[])
 #define N0 9
 #elif N0 == 9
 #undef N0
-#define N0 0
 #if N1 == 0
-#undef N1
 #define N1 1
 #elif N1 == 1
 #undef N1
@@ -66,9 +64,7 @@ int main(int argc, char *argv[])
 #define N1 9
 #elif N1 == 9
 #undef N1
-#define N1 0
 #if N2 == 0
-#undef N2
 #define N2 1
 #elif N2 == 1
 #undef N2
@@ -96,7 +92,6 @@ int main(int argc, char *argv[])
 #define N2 9
 #elif N2 == 9
 #undef N2
-#define N2 0
 #endif
 #endif
 #endif
@@ -124,12 +119,6 @@ int main(int argc, char *argv[])
 #endif
 #undef O
 #if F1 && B1
-#ifndef CS
-#define C(x,y,z) x##y##z
-#define CS(x,y,z) TS(C(x,y,z))
-#define TS(x) TS2(x)
-#define TS2(x) #x
-#endif
 #if N2
 #define O CS(N2,N1,N0)
 #elif N1
