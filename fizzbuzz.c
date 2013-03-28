@@ -1,8 +1,8 @@
-#ifndef I /* initial state */
+#if !I /* initial state */
 #  define N0 0
 #  define N1 0
 #  define N2 0
-#  define I /* initialized! */
+#  define I 1 /* initialized! */
 #  include <stdio.h>
 int main(int argc, char *argv[])
 {
