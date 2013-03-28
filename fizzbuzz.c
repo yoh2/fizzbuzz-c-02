@@ -1,9 +1,6 @@
 #if !I /* initial state */
 #  define I 1 /* initialized! */
-   /* utility macros for later use. */
-#  define C(x,y,z) x##y##z
    /* concat macro contents and convert to string. */
-#  define CS(x,y,z) TS(C(x,y,z))
 #  define TS(x) TS2(x)
 #  define TS2(x) #x
 
@@ -13,95 +10,87 @@ int main(int argc, char *argv[])
 #endif
 
 /* update terget number N (N2 .. N0 hold decimal digit). */
-#if N0 == 0
-#  define N0 1
-#elif N0 == 1
-#  undef N0
-#  define N0 2
-#elif N0 == 2
-#  undef N0
-#  define N0 3
-#elif N0 == 3
-#  undef N0
-#  define N0 4
-#elif N0 == 4
-#  undef N0
-#  define N0 5
-#elif N0 == 5
-#  undef N0
-#  define N0 6
-#elif N0 == 6
-#  undef N0
-#  define N0 7
-#elif N0 == 7
-#  undef N0
-#  define N0 8
-#elif N0 == 8
-#  undef N0
-#  define N0 9
-#elif N0 == 9
-#  undef N0
+#if N0_9
+#  undef N0_1
+#  undef N0_2
+#  undef N0_3
+#  undef N0_4
+#  undef N0_5
+#  undef N0_6
+#  undef N0_7
+#  undef N0_8
+#  undef N0_9
    /* add 10 to N (add 1 to N1). */
-#  if N1 == 0
-#    define N1 1
-#  elif N1 == 1
-#    undef N1
-#    define N1 2
-#  elif N1 == 2
-#    undef N1
-#    define N1 3
-#  elif N1 == 3
-#    undef N1
-#    define N1 4
-#  elif N1 == 4
-#    undef N1
-#    define N1 5
-#  elif N1 == 5
-#    undef N1
-#    define N1 6
-#  elif N1 == 6
-#    undef N1
-#    define N1 7
-#  elif N1 == 7
-#    undef N1
-#    define N1 8
-#  elif N1 == 8
-#    undef N1
-#    define N1 9
-#  elif N1 == 9
-#    undef N1
+#  if N1_9
+#    undef N1_1
+#    undef N1_2
+#    undef N1_3
+#    undef N1_4
+#    undef N1_5
+#    undef N1_6
+#    undef N1_7
+#    undef N1_8
+#    undef N1_9
      /* add 100 to N (add 1 to N2). */
-#    if N2 == 0
-#      define N2 1
-#    elif N2 == 1
-#      undef N2
-#      define N2 2
-#    elif N2 == 2
-#      undef N2
-#      define N2 3
-#    elif N2 == 3
-#      undef N2
-#      define N2 4
-#    elif N2 == 4
-#      undef N2
-#      define N2 5
-#    elif N2 == 5
-#      undef N2
-#      define N2 6
-#    elif N2 == 6
-#      undef N2
-#      define N2 7
-#    elif N2 == 7
-#      undef N2
-#      define N2 8
-#    elif N2 == 8
-#      undef N2
-#      define N2 9
-#    elif N2 == 9
-#      undef N2
+     /* successor of N2_9 is not defined. */
+#    if N2_8
+#      define N2_9 10000
+#    elif N2_7
+#      define N2_8 10000
+#    elif N2_6
+#      define N2_7 10000
+#    elif N2_5
+#      define N2_6 10000
+#    elif N2_4
+#      define N2_5 10000
+#    elif N2_3
+#      define N2_4 10000
+#    elif N2_2
+#      define N2_3 10000
+#    elif N2_1
+#      define N2_2 10000
+#    else
+#      define N2_1 10000
 #    endif
+#  elif N1_8
+#    define N1_9 10000
+#  elif N1_7
+#    define N1_8 10000
+#  elif N1_6
+#    define N1_7 10000
+#  elif N1_5
+#    define N1_6 10000
+#  elif N1_4
+#    define N1_5 10000
+#  elif N1_3
+#    define N1_4 10000
+#  elif N1_2
+#    define N1_3 10000
+#  elif N1_1
+#    define N1_2 10000
+#  else
+#    define N1_1 10000
 #  endif
+#elif N0_8
+#  define N0_9 10000
+#elif N0_7
+#  define N0_8 10000
+#elif N0_6
+#  define N0_7 10000
+#elif N0_5
+#  define N0_6 10000
+#elif N0_4
+#  define N0_5 10000
+#elif N0_3
+#  define N0_4 10000
+#elif N0_2
+#  define N0_3 10000
+#elif N0_1
+#  define N0_2 10000
+#else
+#  define N0_1 10000
 #endif
+
 /* Update "Fizz" remainder flags Fn */
 #if F2
 #  undef F2
@@ -126,29 +115,18 @@ int main(int argc, char *argv[])
 #else
 #  define B1 1
 #endif
-/* Determine output string O. */
-#undef O
-#if F1 && B1
-   /* N -> string */
-#  if N2
-#    define O CS(N2,N1,N0)
-#  elif N1
-#    define O CS(,N1,N0)
-#  else
-#    define O CS(,,N0)
-#  endif
-#elif F1
-#  define O "Buzz"
-#elif B1
-#  define O "Fizz"
-#else
-#  define O "FizzBuzz"
-#endif
 /* check termination condition. */
-#if (N2 > 1) || ((N2 == 1) && ((N1 > 0) || (N0 > 0)))
+#if N2_2 || (N2_1 && (N1_1 || N0_1))
 	return 0;
 }
 #else
-	puts(O);
+	(void)((((sizeof(TS(F1)) != 3) && (sizeof(TS(B1)) != 3)) && (
+		(void)((sizeof(TS(N2_9) TS(N2_8) TS(N2_7) TS(N2_6) TS(N2_5) TS(N2_4) TS(N2_3) TS(N2_2) TS(N2_1)) - 4 * 9 - 1) && putchar('0' + sizeof(TS(N2_9) TS(N2_8) TS(N2_7) TS(N2_6) TS(N2_5) TS(N2_4) TS(N2_3) TS(N2_2) TS(N2_1)) - 4 * 9 - 1)),
+		(void)(((sizeof(TS(N2_1)) != 5) || (sizeof(TS(N1_9) TS(N1_8) TS(N1_7) TS(N1_6) TS(N1_5) TS(N1_4) TS(N1_3) TS(N1_2) TS(N1_1)) - 4 * 9 - 1)) && putchar('0' + sizeof(TS(N1_9) TS(N1_8) TS(N1_7) TS(N1_6) TS(N1_5) TS(N1_4) TS(N1_3) TS(N1_2) TS(N1_1)) - 4 * 9 - 1)),
+		(void)putchar('0' + sizeof(TS(N0_9) TS(N0_8) TS(N0_7) TS(N0_6) TS(N0_5) TS(N0_4) TS(N0_3) TS(N0_2) TS(N0_1)) - 4 * 9 - 1), 1
+	)) || (
+		(void)((sizeof(TS(F1)) == 3) && fputs("Fizz", stdout)),
+		(sizeof(TS(B1)) == 3) && fputs("Buzz", stdout)
+	)), puts("");
 #  include "fizzbuzz.c"
 #endif
