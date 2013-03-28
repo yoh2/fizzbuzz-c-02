@@ -100,34 +100,30 @@ int main(int argc, char *argv[])
 #endif
 #endif
 #endif
-#if F == 0
-#undef F
-#define F 1
-#elif F == 1
-#undef F
-#define F 2
-#elif F == 2
-#undef F
-#define F 0
+#if F2
+#undef F2
+#undef F1
+#elif F1
+#define F2 1
+#else
+#define F1 1
 #endif
-#if B == 0
-#undef B
-#define B 1
-#elif B == 1
-#undef B
-#define B 2
-#elif B == 2
-#undef B
-#define B 3
-#elif B == 3
-#undef B
-#define B 4
-#elif B == 4
-#undef B
-#define B 0
+#if B4
+#undef B4
+#undef B3
+#undef B2
+#undef B1
+#elif B3
+#define B4 1
+#elif B2
+#define B3 1
+#elif B1
+#define B2 1
+#else
+#define B1 1
 #endif
 #undef O
-#if F && B
+#if F1 && B1
 #ifndef CS
 #define C(x,y,z) x##y##z
 #define CS(x,y,z) TS(C(x,y,z))
@@ -141,9 +137,9 @@ int main(int argc, char *argv[])
 #else
 #define O CS(,,N0)
 #endif
-#elif F
+#elif F1
 #define O "Buzz"
-#elif B
+#elif B1
 #define O "Fizz"
 #else
 #define O "FizzBuzz"
