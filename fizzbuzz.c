@@ -1,7 +1,4 @@
 #if !I /* initial state */
-#  define N0 0
-#  define N1 0
-#  define N2 0
 #  define I 1 /* initialized! */
 #  include <stdio.h>
 int main(int argc, char *argv[])
@@ -10,7 +7,6 @@ int main(int argc, char *argv[])
 
 /* update terget number N (N2 .. N0 hold decimal digit). */
 #if N0 == 0
-#  undef N0
 #  define N0 1
 #elif N0 == 1
 #  undef N0
@@ -38,10 +34,8 @@ int main(int argc, char *argv[])
 #  define N0 9
 #elif N0 == 9
 #  undef N0
-#  define N0 0
    /* add 10 to N (add 1 to N1). */
 #  if N1 == 0
-#    undef N1
 #    define N1 1
 #  elif N1 == 1
 #    undef N1
@@ -69,10 +63,8 @@ int main(int argc, char *argv[])
 #    define N1 9
 #  elif N1 == 9
 #    undef N1
-#    define N1 0
      /* add 100 to N (add 1 to N2). */
 #    if N2 == 0
-#      undef N2
 #      define N2 1
 #    elif N2 == 1
 #      undef N2
@@ -100,7 +92,6 @@ int main(int argc, char *argv[])
 #      define N2 9
 #    elif N2 == 9
 #      undef N2
-#      define N2 0
 #    endif
 #  endif
 #endif
