@@ -1,5 +1,12 @@
 #if !I /* initial state */
 #  define I 1 /* initialized! */
+   /* utility macros for later use. */
+#  define C(x,y,z) x##y##z
+   /* concat macro contents and convert to string. */
+#  define CS(x,y,z) TS(C(x,y,z))
+#  define TS(x) TS2(x)
+#  define TS2(x) #x
+
 #  include <stdio.h>
 int main(int argc, char *argv[])
 {
@@ -123,13 +130,6 @@ int main(int argc, char *argv[])
 #undef O
 #if F1 && B1
    /* N -> string */
-#  ifndef CS
-#    define C(x,y,z) x##y##z
-     /* concat macro contents and convert to string. */
-#    define CS(x,y,z) TS(C(x,y,z))
-#    define TS(x) TS2(x)
-#    define TS2(x) #x
-#  endif
 #  if N2
 #    define O CS(N2,N1,N0)
 #  elif N1
