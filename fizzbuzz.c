@@ -77,5 +77,5 @@ int main(int argc, char *argv[])
 		((sizeof(TS(B1)) == 3) && fputs("Buzz", stdout))
 	)),
 	(void)puts(""),
-#include "fizzbuzz.c"
+#include __FILE__
 #endif
